@@ -12,7 +12,7 @@ namespace EnvironmentalDataLogger
         static async Task Main(string[] args)
         {
             // Database
-            const string connector = "mongodb://192.168.178.143:27017";
+            const string connector = "mongodb://admin:local@192.168.178.144:27017/?authSource=admin&readPreference=primary&appname=EnvironmentalDataLogger&ssl=false";
             var mongoClient = new MongoClient(connector);
             var smartHomeDb = mongoClient.GetDatabase("SmartHome");
             var environmentalDataCollection = smartHomeDb.GetCollection<EnvironmentalData>("EnvironmentalData");
