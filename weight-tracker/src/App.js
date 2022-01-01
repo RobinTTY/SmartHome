@@ -1,16 +1,23 @@
 import logo from "./logo.svg";
 import "./App.css";
 
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddWeightForm from "./components/AddWeightForm/AddWeightForm";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const App = () => {
   return (
-    <div className="App">
+    <ThemeProvider theme={darkTheme}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <AddWeightForm />
       </header>
-    </div>
+    </ThemeProvider>
   );
 };
 
