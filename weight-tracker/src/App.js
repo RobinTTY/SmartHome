@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddWeightForm from "./components/AddWeightForm/AddWeightForm";
 
 const darkTheme = createTheme({
