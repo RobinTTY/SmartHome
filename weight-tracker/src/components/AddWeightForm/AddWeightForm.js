@@ -16,6 +16,7 @@ const AddWeightForm = (props) => {
     const data = new FormData(event.currentTarget);
 
     // TODO: add to database
+    postNewWeight();
     console.log({
       weight: data.get("weight"),
     });
@@ -32,6 +33,35 @@ const AddWeightForm = (props) => {
     if (e.target.value === "" || re.test(e.target.value)) {
       setWeight(e.target.value);
     }
+  };
+
+  /**
+   * Posts a new weight through the API to the database.
+   */
+  const postNewWeight = () => {
+    fetch("http://localhost:5262/weightData", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        timestamp: new Date(),
+        weight: weight,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          // TODO: handle success
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          // TODO: handle errors
+        }
+      );
   };
 
   return (
