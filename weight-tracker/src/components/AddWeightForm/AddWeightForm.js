@@ -27,7 +27,7 @@ const AddWeightForm = (props) => {
    * @param {Event} e - The event object
    */
   const weightChangeHandler = (e) => {
-    const re = /^[0-9\b]+$/;
+    const re = /^[0-9\b]+(\.([0-9\b]+)?)?$/;
 
     // if weight is not blank, then test if only numbers are entered
     if (e.target.value === "" || re.test(e.target.value)) {
