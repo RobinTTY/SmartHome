@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SmartHome.Database.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
