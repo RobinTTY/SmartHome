@@ -8,15 +8,26 @@ import Box from "@mui/material/Box";
 const AddWeightForm = (props) => {
   const [weight, setWeight] = useState(0);
 
+  /**
+   * Handles the submission of a weight to the API.
+   * @param {*} event The event containing the weight.
+   */
   const handleSubmit = (event) => {
     // prevent page reload
     event.preventDefault();
 
     // allows us to use the key/value pairs
     const data = new FormData(event.currentTarget);
+    let promise = postNewWeight();
+    promise
+      // TODO: snackbar feedback
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-    // TODO: add to database
-    postNewWeight();
     console.log({
       weight: data.get("weight"),
     });
@@ -24,7 +35,7 @@ const AddWeightForm = (props) => {
 
   /**
    * Handles the change event for the weight input.
-   * @param {Event} e - The event object
+   * @param {Event} e - The event object.
    */
   const weightChangeHandler = (e) => {
     const re = /^[0-9\b]+(\.([0-9\b]+)?)?$/;
@@ -39,7 +50,7 @@ const AddWeightForm = (props) => {
    * Posts a new weight through the API to the database.
    */
   const postNewWeight = () => {
-    fetch("http://localhost:5262/weightData", {
+    return fetch("http://localhost:5262/weightData", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -49,19 +60,7 @@ const AddWeightForm = (props) => {
         timestamp: new Date(),
         weight: weight,
       }),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          // TODO: handle success
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          // TODO: handle errors
-        }
-      );
+    }).then((res) => res.json());
   };
 
   return (
