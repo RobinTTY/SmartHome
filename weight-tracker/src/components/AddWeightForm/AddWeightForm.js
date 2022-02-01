@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
+import { NotificationBarContext } from "../context/NotificationBarContext";
 
 const AddWeightForm = (props) => {
   const [weight, setWeight] = useState(0);
+  const { setNotificationBar } = useContext(NotificationBarContext);
 
   /**
    * Handles the submission of a weight to the API.
@@ -20,17 +22,12 @@ const AddWeightForm = (props) => {
     const data = new FormData(event.currentTarget);
     let promise = postNewWeight();
     promise
-      // TODO: snackbar feedback
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+        setNotificationBar("Weight successfully added!", "success", 6000);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        setNotificationBar("Could not reach API!", "error", 6000);
       });
-
-    console.log({
-      weight: data.get("weight"),
-    });
   };
 
   /**
