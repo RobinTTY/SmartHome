@@ -12,7 +12,7 @@ const NotificationBar = () => {
       return;
     }
 
-    setNotificationBar("");
+    setNotificationBar("", notificationBar.severity, 6000);
   };
 
   return (
