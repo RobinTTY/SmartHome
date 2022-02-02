@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import { NotificationBarContext } from "../context/NotificationBarContext";
 
 const AddWeightForm = (props) => {
-  const [weight, setWeight] = useState(0);
+  const [weight, setWeight] = useState("");
   const { setNotificationBar } = useContext(NotificationBarContext);
 
   /**
@@ -55,7 +55,7 @@ const AddWeightForm = (props) => {
       },
       body: JSON.stringify({
         timestamp: new Date(),
-        weight: weight,
+        weight: Number.parseFloat(weight),
       }),
     }).then((res) => res.json());
   };
