@@ -23,10 +23,10 @@ const AddWeightForm = (props) => {
     let promise = postNewWeight();
     promise
       .then(() => {
-        setNotificationBar("Weight successfully added!", "success", 6000);
+        setNotificationBar("Weight successfully added", "success", 6000);
       })
       .catch(() => {
-        setNotificationBar("Could not reach API!", "error", 6000);
+        setNotificationBar("Could not reach API", "error", 6000);
       });
   };
 
