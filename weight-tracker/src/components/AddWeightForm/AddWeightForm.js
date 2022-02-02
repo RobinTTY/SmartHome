@@ -87,7 +87,12 @@ const AddWeightForm = (props) => {
           value={weight}
           onChange={weightChangeHandler}
         />
-        <Button variant="contained" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          size="large"
+          style={{ margin: 3 + "%" }}
+        >
           Add weight
         </Button>
       </Box>
