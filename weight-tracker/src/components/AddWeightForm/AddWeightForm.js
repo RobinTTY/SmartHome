@@ -19,7 +19,6 @@ const AddWeightForm = (props) => {
     event.preventDefault();
 
     // allows us to use the key/value pairs
-    const data = new FormData(event.currentTarget);
     let promise = postNewWeight();
     promise
       .then(() => {
@@ -57,7 +56,7 @@ const AddWeightForm = (props) => {
         timestamp: new Date(),
         weight: Number.parseFloat(weight),
       }),
-    }).then((res) => res.json());
+    });
   };
 
   return (
