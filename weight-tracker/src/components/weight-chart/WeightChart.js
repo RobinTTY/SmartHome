@@ -34,7 +34,6 @@ const WeightChart = (props) => {
       ],
     };
 
-    // config
     const config = {
       type: "line",
       data: data,
@@ -63,7 +62,6 @@ const WeightChart = (props) => {
       },
     };
 
-    // construct chart
     new Chart(document.getElementById(chartId), config);
   };
 
