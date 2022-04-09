@@ -1,28 +1,28 @@
 import Chart from "chart.js/auto";
 import "chartjs-adapter-date-fns";
 import { useEffect } from "react";
+import WeightData from "../../models/WeightData";
 
 const WeightChart = (props) => {
   const chartId = "weight-chart";
 
-  useEffect(() => {
-    let date1 = Date.parse("01.01.2020");
-    let date2 = Date.parse("01.02.2020");
-    let date3 = Date.parse("01.03.2020");
-    let date4 = Date.parse("01.04.2020");
-    let date5 = Date.parse("01.05.2020");
-    let date6 = Date.parse("01.06.2020");
-    let date7 = Date.parse("02.07.2020");
+  useEffect(async () => {
+    const historicWeightData = await getHistoricWeightData();
+    const weightDataParsed = historicWeightData.map(
+      (item) => new WeightData(item.id, item.weight, new Date(item.timeStamp))
+    );
+    const dates = weightDataParsed.map((item) => item.timeStamp);
+    const values = weightDataParsed.map((item) => item.weight);
 
     const data = {
-      labels: [date1, date2, date3, date4, date5, date6, date7],
+      labels: dates,
       datasets: [
         {
           label: "Weight",
           backgroundColor: "#5580FF",
           borderColor: "#80AAFF",
           fill: false,
-          data: [10, 20, 30, 40, 50, 60, 70],
+          data: values,
         },
       ],
     };
@@ -59,6 +59,14 @@ const WeightChart = (props) => {
     // construct chart
     new Chart(document.getElementById(chartId), config);
   }, []);
+
+  const getHistoricWeightData = async () => {
+    return fetch("http://localhost:5262/weightData")
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      });
+  };
 
   return (
     <>
