@@ -1,8 +1,8 @@
 import "./App.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { lightBlue } from "@mui/material/colors";
-import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
+import { Container } from "@mui/material";
+
 import AddWeightForm from "./components/add-weight-form/AddWeightForm";
 import NotificationBar from "./components/NotificationBar";
 import WeightChart from "./components/weight-chart/WeightChart";
@@ -19,7 +19,9 @@ const App = () => {
       <header className="App-header">
         <h1 style={{ margin: 0 + "px" }}>Weight Tracking</h1>
         {/* <MonitorWeightIcon sx={{ fontSize: 512, color: lightBlue[200] }} /> */}
-        <WeightChart />
+        <Container maxWidth="lg">
+          <WeightChart />
+        </Container>
         <AddWeightForm />
         <NotificationBar />
       </header>

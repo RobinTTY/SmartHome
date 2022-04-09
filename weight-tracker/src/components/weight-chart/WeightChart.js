@@ -49,7 +49,7 @@ const WeightChart = (props) => {
           y: {
             title: {
               display: true,
-              text: "value",
+              text: "weight in kg",
             },
           },
         },
