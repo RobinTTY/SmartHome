@@ -1,18 +1,25 @@
 import Chart from "chart.js/auto";
 import "chartjs-adapter-date-fns";
+
 import { useEffect } from "react";
+
 import WeightData from "../../models/WeightData";
 
 const WeightChart = (props) => {
   const chartId = "weight-chart";
 
-  useEffect(async () => {
-    const historicWeightData = await getHistoricWeightData();
-    const weightDataParsed = historicWeightData.map(
-      (item) => new WeightData(item.id, item.weight, new Date(item.timeStamp))
-    );
-    const dates = weightDataParsed.map((item) => item.timeStamp);
-    const values = weightDataParsed.map((item) => item.weight);
+  useEffect(() => {
+    getHistoricWeightData().then((data) => {
+      const weightDataParsed = data.map(
+        (item) => new WeightData(item.id, item.weight, new Date(item.timeStamp))
+      );
+      createWeightGraph(weightDataParsed);
+    });
+  }, []);
+
+  const createWeightGraph = (weightData) => {
+    const dates = weightData.map((item) => item.timeStamp);
+    const values = weightData.map((item) => item.weight);
 
     const data = {
       labels: dates,
@@ -58,7 +65,7 @@ const WeightChart = (props) => {
 
     // construct chart
     new Chart(document.getElementById(chartId), config);
-  }, []);
+  };
 
   const getHistoricWeightData = async () => {
     return fetch("http://localhost:5262/weightData")
