@@ -4,6 +4,7 @@ import "chartjs-adapter-date-fns";
 import { useEffect } from "react";
 
 import WeightData from "../../models/WeightData";
+import serverConfig from "../../server.conf.json";
 
 const WeightChart = (props) => {
   const chartId = "weight-chart";
@@ -49,7 +50,7 @@ const WeightChart = (props) => {
             type: "time",
             time: {
               display: true,
-              unit: "day",
+              unit: "month",
             },
           },
           y: {
@@ -66,7 +67,7 @@ const WeightChart = (props) => {
   };
 
   const getHistoricWeightData = async () => {
-    return fetch("http://localhost:5262/weightData")
+    return fetch(serverConfig.databaseServer + "/weightData")
       .then((response) => response.json())
       .then((data) => {
         return data;

@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import { NotificationBarContext } from "../context/NotificationBarContext";
+import serverConfig from "../../server.conf.json";
 
 const AddWeightForm = (props) => {
   const [weight, setWeight] = useState("");
@@ -46,7 +47,7 @@ const AddWeightForm = (props) => {
    * Posts a new weight through the API to the database.
    */
   const postNewWeight = () => {
-    return fetch("http://localhost:5262/weightData", {
+    return fetch(serverConfig.databaseServer + "/weightData", {
       method: "POST",
       headers: {
         Accept: "application/json",
