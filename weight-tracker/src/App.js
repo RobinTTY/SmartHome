@@ -19,7 +19,7 @@ const App = () => {
       <header className="App-header">
         <h1 style={{ margin: 0 + "px" }}>Weight Tracking</h1>
         {/* <MonitorWeightIcon sx={{ fontSize: 512, color: lightBlue[200] }} /> */}
-        <Container maxWidth="lg">
+        <Container id="weight-chart-container" maxWidth="lg">
           <WeightChart />
         </Container>
         <AddWeightForm />
