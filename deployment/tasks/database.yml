@@ -1,0 +1,18 @@
+---
+- name: Delete old application files
+  file:
+    state: absent
+    path: /home/ubuntu/projects/SmartHomeDatabase/
+
+- name: Copy new application files
+  synchronize:
+    src: /mnt/c/Projects/SmartHome/SmartHome.Database/bin/Release/net6.0/publish/
+    dest: /home/ubuntu/projects/SmartHomeDatabase/
+
+- name: Make application executable
+  file:
+    dest: /home/ubuntu/projects/SmartHomeDatabase/SmartHome.Database
+    mode: a+x
+
+- name: Start database instance
+  shell: nohup /home/ubuntu/projects/SmartHomeDatabase/SmartHome.Database &

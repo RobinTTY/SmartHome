@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
-using SmartHome.Database.Models;
+using MongoDB.Driver;
+using SmartHome.Models;
 
 namespace SmartHome.Database;
 
@@ -18,4 +19,6 @@ public interface IDatabaseService
     /// <param name="weightData">The <see cref="WeightData"/> to add.</param>
     /// <returns>The added <see cref="WeightData"/> object, updated with the database <see cref="ObjectId"/>.</returns>
     Task<WeightData> AddWeightData(WeightData weightData);
+
+    Task<List<EnvironmentalData>> GetEnvironmentalData(DateTime? startDate, DateTime? endDate);
 }

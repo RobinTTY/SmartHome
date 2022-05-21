@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace SmartHome.Database.Models
+namespace SmartHome.Models
 {
     public class WeightData
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SmartHome.Database.Models;
+using SmartHome.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace SmartHome.Database.Controllers

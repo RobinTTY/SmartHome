@@ -1,9 +1,12 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace EnvironmentalDataLogger
+namespace SmartHome.Models
 {
     public class EnvironmentalData
     {
+        [BsonId]
+        public ObjectId Id { get; set; }
         /// <summary>
         /// The time the measurement was taken.
         /// </summary>

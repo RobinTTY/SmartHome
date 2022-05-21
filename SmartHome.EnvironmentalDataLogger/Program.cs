@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using Bme680Driver;
 using MongoDB.Driver;
 using Serilog;
+using SmartHome.Models;
 
-namespace EnvironmentalDataLogger
+namespace SmartHome.EnvironmentalDataLogger
 {
     class Program
     {

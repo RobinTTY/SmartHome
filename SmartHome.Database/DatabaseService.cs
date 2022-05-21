@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using SmartHome.Database.Models;
 using SmartHome.Database.Utility;
+using SmartHome.Models;
 
 namespace SmartHome.Database
 {
@@ -11,6 +11,7 @@ namespace SmartHome.Database
     public class DatabaseService : IDatabaseService
     {
         private readonly IMongoCollection<WeightData> _weightDataCollection;
+        private readonly IMongoCollection<EnvironmentalData> _environmentalDataCollection;
 
         /// <summary>
         /// Creates a new instance of <see cref="DatabaseService"/>.
@@ -23,6 +24,7 @@ namespace SmartHome.Database
             var db = mongoClient.GetDatabase(databaseSecrets?.DatabaseName);
 
             _weightDataCollection = db.GetCollection<WeightData>("WeightData");
+            _environmentalDataCollection = db.GetCollection<EnvironmentalData>("EnvironmentalData");
         }
 
         /// <summary>
@@ -44,6 +46,13 @@ namespace SmartHome.Database
         {
             await _weightDataCollection.InsertOneAsync(weightData);
             return weightData;
+        }
+
+        public async Task<List<EnvironmentalData>> GetEnvironmentalData(DateTime? startDate, DateTime? endDate)
+        {
+            var filter = Builders<EnvironmentalData>.Filter.Gt(data => data.Timestamp, startDate);
+            filter &= Builders<EnvironmentalData>.Filter.Lt(data => data.Timestamp, endDate);
+            return await _environmentalDataCollection.Find(filter).ToListAsync();
         }
     }
 

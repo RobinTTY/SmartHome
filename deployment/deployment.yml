@@ -1,0 +1,8 @@
+---
+- name: Deploy SmartHome applications
+  hosts: all
+  remote_user: ubuntu
+
+  tasks:
+    - name: Deploy database
+      include_tasks: tasks/database.yml
