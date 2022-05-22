@@ -5,8 +5,8 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace SmartHome.Database.Controllers
 {
     [ApiController]
-    [Route("/weightData")]
-    [SwaggerTag("Weight tracking data for a person.")]
+    [Route("/environmentalData")]
+    [SwaggerTag("Environmental data, like temperature, humidity, etc.")]
     public class EnvironmentalDataController : ControllerBase
     {
         private readonly ILogger<EnvironmentalDataController> _logger;
@@ -19,9 +19,12 @@ namespace SmartHome.Database.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<EnvironmentalData>>> Get([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        public async Task<ActionResult<List<EnvironmentalData>>> Get([FromQuery] long startDateUnixMillis, [FromQuery] long endDateUnixMillis)
         {
-            return await _databaseService.GetEnvironmentalData(startDate, endDate);
+            var startDate = DateTimeOffset.FromUnixTimeMilliseconds(startDateUnixMillis);
+            var endDate = DateTimeOffset.FromUnixTimeMilliseconds(endDateUnixMillis);
+            
+            return await _databaseService.GetEnvironmentalData(startDate.DateTime, endDate.DateTime);
         }
     }
 }
