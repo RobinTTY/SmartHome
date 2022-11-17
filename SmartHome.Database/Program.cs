@@ -24,12 +24,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var options = new JsonSerializerOptions
-{
-    NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
-};
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
